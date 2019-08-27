@@ -4,13 +4,13 @@ import {
   View,
 } from 'react-native';
 import List from './components/List';
-import {MediaProvider} from './components/contexts/MediaContext';
+import {MediaProvider} from './contexts/MediaContext';
 
 const App = () => {
   return (
     <MediaProvider>
       <View style={styles.container}>
-        <List mediaArray={mediaArray}></List>
+        <List></List>
       </View>
     </MediaProvider>
   );
