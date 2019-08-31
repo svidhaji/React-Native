@@ -25,23 +25,23 @@ const styles = StyleSheet.create({
     padding: 12,
     marginBottom: 5,
     backgroundColor: '#eee',
-    borderRadius: 16,
+    borderRadius: 14,
   },
   imagebox: {
     flex: 1,
   },
   image: {
     flex: 1,
-    borderRadius: 16,
+    borderRadius: 12,
   },
   textbox: {
-    flex: 2,
+    flex: 1,
     padding: 10,
   },
   listTitle: {
     fontWeight: 'bold',
-    fontSize: 16,
-    paddingBottom: 14,
+    fontSize: 18,
+    paddingBottom: 10,
   },
 });
 
