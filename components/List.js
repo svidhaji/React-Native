@@ -18,7 +18,6 @@ const List = (props) => {
           return response.json();
         })
         .then(result => {
-          console.log('fetced from server: ', result);
           for (let i = 0; i < 5; i++) {
             let id = result[i].file_id;
             fetch(mediaURL + id)
@@ -33,9 +32,8 @@ const List = (props) => {
                   setMedia(thumb);
                 });
           }
-
         });
-  };
+      };
 
   useEffect(() => getMedia(), []);
   return (

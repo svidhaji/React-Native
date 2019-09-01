@@ -8,7 +8,6 @@ const ListItem = (props) => {
       <View style={styles.imagebox}>
         <Image
           style={styles.image}
-          result.thumbnails.w160 = thumbUrl + result.thumbnails.w160
           source={{uri: props.singleMedia.thumbnails.w160}}
         />
       </View>
