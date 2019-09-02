@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import {
   FlatList,
@@ -6,36 +6,23 @@ import {
 import ListItem from './ListItem';
 import {MediaContext} from '../contexts/MediaContext';
 
-const dataURL = 'https://raw.githubusercontent.com/mattpe/wbma/master/docs/assets/test.json';
-const mediaURL = 'http://http://media.mw.metropolia.fi/wbma/uploads/';
-const List = (props) => {
+const useFetch = (url) => {
   const [media, setMedia] = useContext(MediaContext);
-  console.log(media);
+  const [loading, setLoading] = useState(true);
+  const fetchUrl = async () => {
+    const response = await fetch(url);
+    const json = await response.json();
+    setMedia(json);
+    setLoading(false);
+  };
+  useEffect(fetchUrl, []);
+  return [media, loading];
+};
 
-  const getMedia = () => {
-    fetch(dataURL)
-        .then(response => {
-          return response.json();
-        })
-        .then(result => {
-          for (let i = 0; i < 5; i++) {
-            let id = result[i].file_id;
-            fetch(mediaURL + id)
-                .then(response => {
-                  return response.json();
-                })
-                .then(result => {
-                  console.log(result);
-
-                  thumb.push(result);
-                  console.log('This is the final Array of Objects: \n', thumb);
-                  setMedia(thumb);
-                });
-          }
-        });
-      };
-
-  useEffect(() => getMedia(), []);
+const List = (props) => {
+  const [media, loading] = useFetch('http://media.mw.metropolia.fi/wbma/media/');
+  console.log(loading);
+  console.log('media', media);
   return (
     <FlatList
       data={media}

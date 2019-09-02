@@ -1,15 +1,39 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 
-const ListItem = (props) => {
+const getThumbnail = url => {
+  console.log('urli', url);
+  const [thumbnails, setThumbnails] = useState({});
+  async function fetchUrl() {
+    console.log('fetsurl');
+    const response = await fetch(
+        'http://media.mw.metropolia.fi/wbma/media/' + url
+    );
+    const json = await response.json();
+    console.log('json', json);
+    setThumbnails(json.thumbnails);
+  }
+  useEffect(() => {
+    fetchUrl();
+  }, []);
+  return thumbnails;
+};
+
+const ListItem = props => {
+  const tn = getThumbnail(props.singleMedia.file_id);
+  console.log('thumbnails', tn);
   return (
     <TouchableOpacity style={styles.row}>
       <View style={styles.imagebox}>
-        <Image
-          style={styles.image}
-          source={{uri: props.singleMedia.thumbnails.w160}}
-        />
+        {tn && (
+          <Image
+            style={styles.image}
+            source={{
+              uri: 'http://media.mw.metropolia.fi/wbma/uploads/' + tn.w160
+            }}
+          />
+        )}
       </View>
       <View style={styles.textbox}>
         <Text style={styles.listTitle}> {props.singleMedia.title} </Text>
@@ -22,31 +46,31 @@ const ListItem = (props) => {
 const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
-    padding: 12,
+    padding: 15,
     marginBottom: 5,
     backgroundColor: '#eee',
-    borderRadius: 16,
+    borderRadius: 16
   },
   imagebox: {
-    flex: 1,
+    flex: 1
   },
   image: {
     flex: 1,
-    borderRadius: 16,
+    borderRadius: 16
   },
   textbox: {
     flex: 2,
-    padding: 10,
+    padding: 10
   },
   listTitle: {
     fontWeight: 'bold',
-    fontSize: 16,
-    paddingBottom: 14,
-  },
+    fontSize: 20,
+    paddingBottom: 15
+  }
 });
 
 ListItem.propTypes = {
-  singleMedia: PropTypes.object,
+  singleMedia: PropTypes.object
 };
 
 export default ListItem;

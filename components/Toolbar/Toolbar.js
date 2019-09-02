@@ -1,7 +1,7 @@
 import React from 'react';
 import './Toolbar.css';
 
-const toolbar = props => (
+const Toolbar = (props) => (
   <header className="toolbar">
     <nav className="toolbar-nav">
       <div></div>
@@ -12,4 +12,4 @@ const toolbar = props => (
 
 );
 
-export default toolbar;
+export default Toolbar;
