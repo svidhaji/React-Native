@@ -21,9 +21,10 @@ const ListItem = (props) => {
 
 const styles = StyleSheet.create({
   row: {
+    flex: 2,
     flexDirection: 'row',
+    flexWrap: 'wrap',
     padding: 12,
-    marginBottom: 5,
     backgroundColor: '#eee',
     borderRadius: 14,
   },
@@ -33,6 +34,8 @@ const styles = StyleSheet.create({
   image: {
     flex: 1,
     borderRadius: 12,
+    height: 100,
+    width: 100,
   },
   textbox: {
     flex: 1,

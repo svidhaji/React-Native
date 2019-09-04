@@ -2,16 +2,15 @@ import React from 'react';
 import {
   StyleSheet,
   View,
-  ToolbarAndroid,
 } from 'react-native';
 import List from './components/List';
 import {MediaProvider} from './contexts/MediaContext';
 
 const App = () => {
   return (
-    <MediaProvider>
-      <ToolbarAndroid style={styles.toolba} title="AwesomeApp"/>
+    <MediaProvider style={styles.main}>
       <View style={styles.container}>
+        <Text></Text>
         <List></List>
       </View>
     </MediaProvider>
@@ -20,14 +19,14 @@ const App = () => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#fff',
-    paddingHorizontal: 10,
-    paddingTop: 40,
+    flex: 1,
+    justifyContent: 'center',
+    backgroundColor: 'skyblue',
+    alignitems: 'center',
   },
 
-  toolba: {
-    backgroundColor: 'green',
-    fontSize: 10,
+  main: {
+    flex: 4,
   },
 });
 
