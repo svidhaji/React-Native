@@ -3,9 +3,9 @@ import {createBottomTabNavigator} from 'react-navigation-tabs';
 import {createStackNavigator} from 'react-navigation-stack';
 import Home from '../views/Home';
 import Profile from '../views/Profile';
-import Single from '../views/Single';
-import AuthLoading from '../views/AuthLoading';
-import Login from '../views/Login';
+import Single from './components/views/Single';
+import AuthLoading from './components/views/AuthLoading';
+import Login from './components/views/Login';
 
 const TabNavigator = createBottomTabNavigator(
     {
