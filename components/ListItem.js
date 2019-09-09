@@ -19,26 +19,28 @@ const getThumbnail = (url) => {
 };
 
 const ListItem = (props) => {
-  const tn = getThumbnail(props.singleMedia.file_id);
+  const {navigation, singleMedia} = props;
+  const tn = getThumbnail(singleMedia.file_id);
   console.log('thumbnails', tn);
   return (
-    <TouchableOpacity style={styles.row}
+    <TouchableOpacity
+      style={styles.row}
       onPress={
         () => {
-          console.log('Opening singlemedia', props.singleMedia);
-          props.navigation.push('Single');
+          console.log('klik');
+          navigation.push('Single', {file: singleMedia});
         }
-      }>
+      }
+    >
       <View style={styles.imagebox}>
         {tn && <Image
           style={styles.image}
           source={{uri: 'http://media.mw.metropolia.fi/wbma/uploads/' + tn.w160}}
-
         />}
       </View>
       <View style={styles.textbox}>
-        <Text style={styles.listTitle}> {props.singleMedia.title} </Text>
-        <Text> {props.singleMedia.description} </Text>
+        <Text style={styles.listTitle}> {singleMedia.title} </Text>
+        <Text> {singleMedia.description} </Text>
       </View>
     </TouchableOpacity>
   );

@@ -1,16 +1,24 @@
 import React from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import {StyleSheet, SafeAreaView, Text} from 'react-native';
+import PropTypes from 'prop-types';
 
 const Single = (props) => {
   const {navigation} = props;
+  console.log('Singel navi', navigation.state);
   const file = navigation.state.params.file;
   return (
-    <View style={styles.container}>
-       <Text style={props.singleMedia.title}>Profile</Text>
-      <Image style={styles.image}
-        source={{uri: 'http://media.mw.metropolia.fi/wbma/uploads/' + tn.w160}}>
-      </Image>
-    </View>
+    <SafeAreaView style={styles.container}>
+      <Text>{file.title}</Text>
+      <AImage
+        source={{uri: 'http://media.mw.metropolia.fi/wbma/uploads/' + file.filename}}
+        style={{
+          borderRadius: 50,
+          width: '100%',
+          height: '90%',
+        }}
+        spinnerColor='#b3e5fc'
+      />
+    </SafeAreaView>
   );
 };
 
@@ -20,12 +28,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingTop: 40,
-  },
-  image: {
-    flex: 1,
-    borderRadius: 16,
   },
 });
+
+Single.propTypes = {
+  navigation: PropTypes.object,
+  file: PropTypes.object,
+};
 
 export default Single;
