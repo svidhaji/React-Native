@@ -1,10 +1,8 @@
 import React, {useContext, useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
-import {
-  FlatList,
-} from 'react-native';
+import {List as BaseList} from 'native-base';
 import ListItem from './ListItem';
-import {MediaContext} from '../contexts/MediaContext';
+import {MediaContext} from './contexts/MediaContext';
 
 const useFetch = (url) => {
   const [media, setMedia] = useContext(MediaContext);
@@ -27,9 +25,9 @@ const List = (props) => {
   console.log(loading);
   console.log('media', media);
   return (
-    <FlatList
-      data={media}
-      renderItem={({item}) =>
+    <BaseList
+      dataArray={media}
+      renderRow={(item) =>
         <ListItem navigation={navigation} singleMedia={item} />}
       keyExtractor={(item, index) => index.toString()}
     />

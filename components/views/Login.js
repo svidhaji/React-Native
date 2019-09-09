@@ -6,7 +6,7 @@ import {
   Button,
 } from 'react-native';
 import PropTypes from 'prop-types';
-import FormTextInput from '../components/views/FormTextInput';
+import FormTextInput from '../FormTextInput';
 import useSignUpForm from '../hooks/LoginHooks';
 import mediaAPI from '../hooks/ApiHooks';
 

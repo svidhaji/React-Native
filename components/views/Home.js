@@ -1,12 +1,9 @@
 /* eslint-disable max-len */
 import React from 'react';
-import {
-  StyleSheet,
-  SafeAreaView,
-} from 'react-native';
-import List from '../components/List';
+import List from '../List';
 import PropTypes from 'prop-types';
 import mediaAPI from '../hooks/ApiHooks';
+import {Container} from 'native-base';
 
 
 const Home = (props) => {
@@ -14,18 +11,11 @@ const Home = (props) => {
   const {getUserFromToken} = mediaAPI();
   getUserFromToken();
   return (
-    <SafeAreaView style={styles.container}>
+    <Container>
       <List navigation={navigation}></List>
-    </SafeAreaView>
+    </Container>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#fff',
-    paddingHorizontal: 10,
-  },
-});
 
 Home.propTypes = {
   navigation: PropTypes.object,

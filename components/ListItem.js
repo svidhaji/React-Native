@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
+import {ListItem as BaseListItem} from 'native-base';
 
 const getThumbnail = (url) => {
   console.log('urli', url);
@@ -23,26 +24,28 @@ const ListItem = (props) => {
   const tn = getThumbnail(singleMedia.file_id);
   console.log('thumbnails', tn);
   return (
-    <TouchableOpacity
-      style={styles.row}
-      onPress={
-        () => {
-          console.log('klik');
-          navigation.push('Single', {file: singleMedia});
+    <BaseListItem>
+      <TouchableOpacity
+        style={styles.row}
+        onPress={
+          () => {
+            console.log('klik');
+            navigation.push('Single', {file: singleMedia});
+          }
         }
-      }
-    >
-      <View style={styles.imagebox}>
-        {tn && <Image
-          style={styles.image}
-          source={{uri: 'http://media.mw.metropolia.fi/wbma/uploads/' + tn.w160}}
-        />}
-      </View>
-      <View style={styles.textbox}>
-        <Text style={styles.listTitle}> {singleMedia.title} </Text>
-        <Text> {singleMedia.description} </Text>
-      </View>
-    </TouchableOpacity>
+      >
+        <View style={styles.imagebox}>
+          {tn && <Image
+            style={styles.image}
+            source={{uri: 'http://media.mw.metropolia.fi/wbma/uploads/' + tn.w160}}
+          />}
+        </View>
+        <View style={styles.textbox}>
+          <Text style={styles.listTitle}> {singleMedia.title} </Text>
+          <Text> {singleMedia.description} </Text>
+        </View>
+      </TouchableOpacity>
+    </BaseListItem>
   );
 };
 
