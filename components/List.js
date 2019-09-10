@@ -5,7 +5,7 @@ import ListItem from './ListItem';
 import {MediaContext} from './contexts/MediaContext';
 
 const useFetch = (url) => {
-  const [media, setMedia] = useContext(MediaContext);
+  const {media, setMedia} = useContext(MediaContext);
   const [loading, setLoading] = useState(true);
   const fetchUrl = async () => {
     const response = await fetch(url);

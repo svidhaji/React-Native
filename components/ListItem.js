@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import {Image} from 'react-native';
 import {ListItem as BaseListItem, Text,
   Container, Content,
-Header, Card,
-CardItem, Body} from 'native-base';
+  Header, Card,
+  CardItem, Body} from 'native-base';
 
 const getThumbnail = (url) => {
   console.log('urli', url);
@@ -31,10 +31,15 @@ const ListItem = (props) => {
       <Content>
         <Card>
           <CardItem>
-            <Body>
+            <Body onPress={
+              () => {
+                console.log('klik');
+                navigation.push('Single', {file: singleMedia});
+              }
+            }>
               <Image
                 source={{uri: 'http://media.mw.metropolia.fi/wbma/uploads/' + tn.w160}}
-                style={{height: 300, width: 300, flex: 1, alignItems: 'center'}}
+                style={{height: 200, width: 200, flex: 1, alignItems: 'center'}}
               />
               <Text>{singleMedia.title}</Text>
               <Text>{singleMedia.description}</Text>

@@ -7,9 +7,15 @@ import {Container, Content} from 'native-base';
 
 
 const Home = (props) => {
+  const {userToContext} = mediaAPI();
   const {navigation} = props;
   const {getUserFromToken} = mediaAPI();
+
+  userToContext().then((user) => {
+    console.log('usercontext', user);
+  });
   getUserFromToken();
+
   return (
     <Container>
       <Content>
@@ -21,6 +27,8 @@ const Home = (props) => {
 
 Home.propTypes = {
   navigation: PropTypes.object,
+  userToContext: PropTypes.object,
+  getUserFromToken: PropTypes.object,
 };
 
 export default Home;

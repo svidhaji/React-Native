@@ -6,7 +6,7 @@ import {
   Image,
 } from 'react-native';
 import PropTypes from 'prop-types';
-import mediaAPI from '../hooks/ApiHooks';
+// import mediaAPI from '../hooks/ApiHooks';
 import {Container, CardItem} from 'native-base';
 
 const Profile = (props) => {
@@ -19,8 +19,8 @@ const Profile = (props) => {
     getUser();
   }, []);
   console.log('ret user', user);
-  const {getAvatar} = mediaAPI();
-  console.log('avataar', avatar);
+  // const {getAvatar} = mediaAPI();
+  // console.log('avataar', avatar);
   const signOutAsync = async () => {
     await AsyncStorage.clear();
     props.navigation.navigate('Auth');
@@ -32,9 +32,12 @@ const Profile = (props) => {
         <Text>{user.username}</Text>
         }
       </CardItem>
-      <Button bordered dark onPress={signOutAsync}>
-        <Text>Logout</Text>
-      </Button>
+      <Button title="Sign out!" onPress={
+        () => {
+          signOutAsync();
+        }
+      } />
+      <Text>Logout</Text>
     </Container>
   );
 };
