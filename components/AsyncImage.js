@@ -18,7 +18,7 @@ const AImage = (props) => {
     source,
   } = props;
   return (
-    <View style={style}>
+    <View>
       <Image
         source={source}
         resizeMode={'contain'}

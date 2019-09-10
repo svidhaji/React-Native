@@ -1,12 +1,13 @@
 import React, {useState, useEffect} from 'react';
 import {
-  StyleSheet,
-  SafeAreaView,
   Text,
   Button,
   AsyncStorage,
+  Image,
 } from 'react-native';
 import PropTypes from 'prop-types';
+import mediaAPI from '../hooks/ApiHooks';
+import {Container, CardItem} from 'native-base';
 
 const Profile = (props) => {
   const [user, setUser] = useState({});
@@ -18,30 +19,25 @@ const Profile = (props) => {
     getUser();
   }, []);
   console.log('ret user', user);
+  const {getAvatar} = mediaAPI();
+  console.log('avataar', avatar);
   const signOutAsync = async () => {
     await AsyncStorage.clear();
     props.navigation.navigate('Auth');
   };
   return (
-    <SafeAreaView style={styles.container}>
-      {user &&
+    <Container>
+      <CardItem>
+        {user &&
         <Text>{user.username}</Text>
-      }
-      <Button title="Logout!" onPress={signOutAsync}
-      />
-    </SafeAreaView>
+        }
+      </CardItem>
+      <Button bordered dark onPress={signOutAsync}>
+        <Text>Logout</Text>
+      </Button>
+    </Container>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingTop: 40,
-  },
-});
 
 Profile.propTypes = {
   navigation: PropTypes.object,

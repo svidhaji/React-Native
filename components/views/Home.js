@@ -3,7 +3,7 @@ import React from 'react';
 import List from '../List';
 import PropTypes from 'prop-types';
 import mediaAPI from '../hooks/ApiHooks';
-import {Container} from 'native-base';
+import {Container, Content} from 'native-base';
 
 
 const Home = (props) => {
@@ -12,7 +12,9 @@ const Home = (props) => {
   getUserFromToken();
   return (
     <Container>
-      <List navigation={navigation}></List>
+      <Content>
+        <List navigation={navigation}></List>
+      </Content>
     </Container>
   );
 };
