@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import {Image} from 'react-native';
 import {ListItem as BaseListItem, Text,
   Container, Content,
-  Header, Card,
-  CardItem, Body} from 'native-base';
+  Card, CardItem, Right,
+  Button, Icon} from 'native-base';
 
 const getThumbnail = (url) => {
   console.log('urli', url);
@@ -28,22 +28,27 @@ const ListItem = (props) => {
   console.log('thumbnails', tn);
   return (
     <Container>
-      <Content>
+      <Content style={{backgroundColor: 'lightyellow'}}>
         <Card>
+          <Right style={{alignItems: 'flex-end'}}>
+            <Button transparent
+              onPress={
+                () => {
+                  console.log('klik');
+                  navigation.push('Single', {file: singleMedia});
+                }
+              }>
+              <Icon active name="settings" />
+              <Text>More</Text>
+            </Button>
+          </Right>
           <CardItem>
-            <Body onPress={
-              () => {
-                console.log('klik');
-                navigation.push('Single', {file: singleMedia});
-              }
-            }>
-              <Image
-                source={{uri: 'http://media.mw.metropolia.fi/wbma/uploads/' + tn.w160}}
-                style={{height: 200, width: 200, flex: 1, alignItems: 'center'}}
-              />
-              <Text>{singleMedia.title}</Text>
-              <Text>{singleMedia.description}</Text>
-            </Body>
+            <Image
+              source={{uri: 'http://media.mw.metropolia.fi/wbma/uploads/' + tn.w160}}
+              style={{height: 400, width: 400, flex: 1, justifyContent: 'space-between'}}
+            />
+            <Text>{singleMedia.title}</Text>
+            <Text>{singleMedia.description}</Text>
           </CardItem>
         </Card>
       </Content>

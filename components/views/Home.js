@@ -27,8 +27,6 @@ const Home = (props) => {
 
 Home.propTypes = {
   navigation: PropTypes.object,
-  userToContext: PropTypes.object,
-  getUserFromToken: PropTypes.object,
 };
 
 export default Home;

@@ -97,14 +97,18 @@ const mediaAPI = () => {
   };
 
 
-  const getAvatar = (user) => {
-    const [avatar, setAvatar] = useState({});
+  const getAvatar = () => {
+    const {user} = useContext(MediaContext);
+    console.log('Avatar user get', user);
+    let avatar;
     console.log('avatar', apiUrl + 'tags/avatar_' + user.user_id);
-    fetchGetUrl(apiUrl + 'tags/avatar_' + user.user_id).then((json) => {
-      console.log('avatarjson', json[0].filename);
-      setAvatar(apiUrl + 'uploads/' + json[0].filename);
-    });
-    return avatar;
+    return fetchGetUrl(apiUrl + 'tags/avatar_' + user.user_id)
+        .then((json) => {
+          console.log('avatarjson', json);
+          avatar = apiUrl + 'uploads/' + json[0].filename;
+          return avatar;
+        }
+        );
   };
 
 
