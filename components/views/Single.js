@@ -12,6 +12,7 @@ const Single = (props) => {
       <Text>{file.title}</Text>
       <AImage
         source={{uri: 'http://media.mw.metropolia.fi/wbma/uploads/' + file.filename}}
+        style={{borderRadius: 50, height: 600, width: 500, padding: 0}}
         spinnerColor='#b3e5fc'
       />
     </SafeAreaView>

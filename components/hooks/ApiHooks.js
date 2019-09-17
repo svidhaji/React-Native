@@ -104,7 +104,7 @@ const mediaAPI = () => {
     console.log('avatar', apiUrl + 'tags/avatar_' + user.user_id);
     return fetchGetUrl(apiUrl + 'tags/avatar_' + user.user_id)
         .then((json) => {
-          console.log('avatarjson', json);
+          console.log('avatarjson getAvatar', json);
           avatar = apiUrl + 'uploads/' + json[0].filename;
           return avatar;
         }

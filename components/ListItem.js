@@ -27,32 +27,28 @@ const ListItem = (props) => {
   const tn = getThumbnail(singleMedia.file_id);
   console.log('thumbnails', tn);
   return (
-    <Container>
-      <Content style={{backgroundColor: 'lightyellow'}}>
-        <Card>
-          <Right style={{alignItems: 'flex-end'}}>
-            <Button transparent
-              onPress={
-                () => {
-                  console.log('klik');
-                  navigation.push('Single', {file: singleMedia});
-                }
-              }>
-              <Icon active name="settings" />
-              <Text>More</Text>
-            </Button>
-          </Right>
-          <CardItem>
-            <Image
-              source={{uri: 'http://media.mw.metropolia.fi/wbma/uploads/' + tn.w160}}
-              style={{height: 400, width: 400, flex: 1, justifyContent: 'space-between'}}
-            />
-            <Text>{singleMedia.title}</Text>
-            <Text>{singleMedia.description}</Text>
-          </CardItem>
-        </Card>
-      </Content>
-    </Container>
+    <BaseListItem>
+      <Right style={{alignItems: 'flex-end'}}>
+        <Button transparent
+          onPress={
+            () => {
+              console.log('klik');
+              navigation.push('Single', {file: singleMedia});
+            }
+          }>
+          <Icon active name="settings" />
+          <Text>Explore</Text>
+        </Button>
+      </Right>
+      <CardItem>
+        <Image
+          source={{uri: 'http://media.mw.metropolia.fi/wbma/uploads/' + tn.w160}}
+          style={{height: 400, width: 400, flex: 1, justifyContent: 'center'}}
+        />
+        <Text>{singleMedia.title}</Text>
+        <Text>{singleMedia.description}</Text>
+      </CardItem>
+    </BaseListItem>
   );
 };
 
