@@ -11,7 +11,8 @@ import {Container, CardItem, Content, Card} from 'native-base';
 import {MediaContext} from '../contexts/MediaContext';
 
 const Profile = (props) => {
-  const {user} = useContext(MediaContext).user;
+  const {user} = useContext(MediaContext);
+  console.log('profile user', user);
   const [avatar, setAvatar] = useState(undefined);
   console.log('Avatar', avatar);
 
@@ -38,9 +39,11 @@ const Profile = (props) => {
       <Content>
         <Card>
           <CardItem cardBody>
-            <Image source={{avatar}}
+            {avatar &&
+            <Image source={{uri: avatar}}
               style={{height: 300, width: 300, flex: 1, justifyContent: 'center'}}>
             </Image>
+            }
           </CardItem>
           <CardItem>
             {user &&

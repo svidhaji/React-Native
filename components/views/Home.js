@@ -9,12 +9,12 @@ import {Container, Content} from 'native-base';
 const Home = (props) => {
   const {userToContext} = mediaAPI();
   const {navigation} = props;
-  const {getUserFromToken} = mediaAPI();
+  //const {getUserFromToken} = mediaAPI();
 
   userToContext().then((user) => {
     console.log('usercontext', user);
   });
-  getUserFromToken();
+  //getUserFromToken();
 
   return (
     <Container>

@@ -60,7 +60,7 @@ const mediaAPI = () => {
     };
     const json = await fetchPostUrl(apiUrl + 'login', data);
     await AsyncStorage.setItem('userToken', json.token);
-    // await AsyncStorage.setItem('user', JSON.stringify(json.user));
+    await AsyncStorage.setItem('user', JSON.stringify(json.user));
     props.navigation.navigate('App');
   };
   const registerAsync = async (inputs, props) => {
@@ -75,17 +75,19 @@ const mediaAPI = () => {
       signInAsync(inputs, props);
     }
   };
-
+/*
   const getUserFromToken = async () => {
     fetchGetUrl(apiUrl + 'users/user').then((json) => {
       console.log('getUserTOken', json);
       AsyncStorage.setItem('user', JSON.stringify(json));
     });
   };
-
+*/
   const userToContext = async () => { // Call this when app starts (= Home.js)
     const {user, setUser} = useContext(MediaContext);
     const getFromStorage = async () => {
+
+      // await AsyncStorage.clear();
       const storageUser = JSON.parse(await AsyncStorage.getItem('user'));
       console.log('storage', storageUser);
       setUser(storageUser);
@@ -106,9 +108,35 @@ const mediaAPI = () => {
         .then((json) => {
           console.log('avatarjson', json);
           avatar = apiUrl + 'uploads/' + json[0].filename;
+          console.log('avataaaaari', avatar);
           return avatar;
         }
         );
+  };
+
+  const getUserInfo = (userId) => {
+    const [userInfo, setUserInfo] = useState({});
+    useEffect(() => {
+      fetchGetUrl(apiUrl + 'users/' + userId).then((json) => {
+        setUserInfo(json);
+      }).catch((error)=>{
+        setUserInfo({});
+      });
+    }, []);
+    return userInfo;
+  };
+
+  const checkAvailable = async (username) => {
+    const json = await fetchGetUrl(apiUrl + 'users/username/' + username);
+    if (!json.error) {
+      if (json.available) {
+        return 'Username ' + json.username + ' is available. ';
+      } else {
+        return 'Username ' + json.username + ' is not available. ';
+      }
+    } else {
+      console.log(json.error);
+    }
   };
 
 
@@ -117,9 +145,10 @@ const mediaAPI = () => {
     getThumbnail,
     signInAsync,
     registerAsync,
-    getUserFromToken,
-    getAvatar,
     userToContext,
+    getAvatar,
+    getUserInfo,
+    checkAvailable,
   };
 };
 
