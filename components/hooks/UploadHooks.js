@@ -22,7 +22,6 @@ const useUploadForm = () => {
 
   const handleUpload = (file) => {
     const fd = new FormData();
-    console.log('handleupload', file);
     const filename = file.uri.split('/').pop();
 
     // Infer the type of the image
@@ -30,6 +29,10 @@ const useUploadForm = () => {
     let type = '';
     if (file.type === 'image') {
       type = match ? `image/${match[1]}` : `image`;
+    }
+    // fix jpg mimetype
+    if (type === 'image/jpg') {
+      type = 'image/jpeg';
     } else {
       type = match ? `video/${match[1]}` : `video`;
     }

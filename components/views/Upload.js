@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {Image} from 'react-native';
-import {Form, Button, Text, Content} from 'native-base';
+import {Form, Button, Text, Content, Card, Header} from 'native-base';
 import FormTextInput from '../FormTextInput';
 import PropTypes from 'prop-types';
 import useUploadForm from '../hooks/UploadHooks';
@@ -20,7 +20,7 @@ const Upload = (props) => {
 
   getPermissionAsync = async () => {
     if (Constants.platform.ios) {
-      const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+      const {status} = await Permissions.askAsync(Permissions.CAMERA_ROLL);
       if (status !== 'granted') {
         alert('Sorry, we need camera roll permissions to make this work!');
       }
@@ -47,35 +47,42 @@ const Upload = (props) => {
 
   return (
     <Content>
-      {file &&
-          <Image source={{uri: file.uri}} style={{width: 200, height: 200 }} />}
-      <Form>
-        <FormTextInput
-          value={inputs.title}
-          placeholder='title'
-          onChangeText={handleTitleChange}
-        />
-        <FormTextInput
-          value={inputs.description}
-          placeholder='description'
-          onChangeText={handleDescriptionChange}
-        />
-        <Button block
-          onPress={pickImage}
-        >
-          <Text>Choose file</Text>
-        </Button>
-        <Button block
-          onPress={() => {
-            handleUpload(file);
-          }}
-        >
-          <Text>Upload file</Text>
-        </Button>
-        <Button block>
-          <Text>Reset</Text>
-        </Button>
-      </Form>
+      <Header />
+      <Card>
+        {file &&
+          <Image source={{uri: file.uri}} style={{width: 200, height: 200}} />}
+        <Form>
+          <FormTextInput
+            value={inputs.title}
+            placeholder='title'
+            onChangeText={handleTitleChange}
+          />
+          <FormTextInput
+            value={inputs.description}
+            placeholder='description'
+            onChangeText={handleDescriptionChange}
+          />
+          <Button block
+            onPress={pickImage}
+          >
+            <Text>Choose file</Text>
+          </Button>
+          <Button block
+            onPress={() => {
+              handleUpload(file);
+            }}
+          >
+            <Text>Upload file</Text>
+          </Button>
+          <Button block onPress={() => {
+            setFile(null);
+            inputs.title = '';
+            inputs.description = '';
+          }}>
+            <Text>Reset</Text>
+          </Button>
+        </Form>
+      </Card>
     </Content>
 
   );
