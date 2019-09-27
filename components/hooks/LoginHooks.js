@@ -140,6 +140,11 @@ const useSignUpForm = () => {
       email: emailError,
       confirm: confirmError,
     }));
+    if (usernameError !== null || passwordError !== null || emailError !== null || confirmError !== null) {
+      return false;
+    } else {
+      return true;
+    }
   };
 
   const checkUserAvailable = (event) => {
